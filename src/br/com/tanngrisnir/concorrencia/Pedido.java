@@ -2,17 +2,16 @@ package br.com.tanngrisnir.concorrencia;
 
 public class Pedido {
 
-	private String id;
+	private StringBuilder id;
+	private StringBuilder dados;
 
-	public Pedido() {
-	}
-
-	public void setId(String id) {
+	public Pedido(StringBuilder id, StringBuilder dados) {
 		this.id = id;
+		this.dados = dados;
 	}
 
-	public String getId() {
-		return this.id;
+	@Override
+	public String toString() {
+		return "Identificador: " + id + " | Dados: " + dados;
 	}
-
 }

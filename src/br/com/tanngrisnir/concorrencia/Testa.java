@@ -1,17 +1,16 @@
 package br.com.tanngrisnir.concorrencia;
 
-import java.io.IOException;
+import java.util.concurrent.BlockingQueue;
 
 public class Testa {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws InterruptedException {
 
-		int numero = 57;
+		BlockingQueue<Pedido> buffer = new GeradorDeBuffer(5000).gerar();
 		
-		char letra = (char) numero;
+		Thread thread = new Thread(new Consumidor(buffer));
 		
-		System.out.println(letra);
-
+		thread.start();
+		
 	}
-
 }
