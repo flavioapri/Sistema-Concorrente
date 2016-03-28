@@ -22,6 +22,8 @@ public class Consumidor implements Runnable {
 				System.out.println("Não foi possível consumir o pedido");
 			}
 		}
+
+		Principal.executadas++;
 	}
 
 }

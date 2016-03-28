@@ -1,17 +1,17 @@
 package br.com.tanngrisnir.concorrencia;
 
-import java.util.concurrent.BlockingQueue;
-
 public class ContadorDeTempoDeExecucao implements Runnable {
 	private long tempoInicial;
 	private long tempoFinal;
 	private long tempoTotal;
-	private BlockingQueue<Pedido> buffer;
 	private boolean executou;
 
-	public ContadorDeTempoDeExecucao(BlockingQueue<Pedido> buffer) {
-		this.buffer = buffer;
+	public ContadorDeTempoDeExecucao() {
 		this.executou = false;
+	}
+
+	public long getTempoTotal() {
+		return this.tempoTotal;
 	}
 
 	@Override
@@ -19,12 +19,16 @@ public class ContadorDeTempoDeExecucao implements Runnable {
 		tempoInicial = System.currentTimeMillis();
 
 		while (!executou) {
-			if (buffer.isEmpty()) {
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+			}
+
+			if (Principal.executadas == Principal.quantidadeDeThreads) {
 				tempoFinal = System.currentTimeMillis();
 				tempoTotal = tempoFinal - tempoInicial;
 				executou = true;
-
-				System.out.println("Tempo total de processamento " + tempoTotal + " ms");
+				System.out.println("Tempo total " + tempoTotal + " ms");
 			}
 		}
 
