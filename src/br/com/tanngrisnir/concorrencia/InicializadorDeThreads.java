@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * Inicializa todas as threads necessárias para a execução da aplicação. Com ela
+ * retiramos a responsabilidade da classe <b>Principal</b> realizar esta tarefa
+ * separando esta lógica e simplificando a classe <b>Principal</b>.
+ * 
+ * @author Flávio Aparecido Ribeiro
+ *
+ */
 public class InicializadorDeThreads {
 	private BlockingQueue<Pedido> buffer;
 	private List<Thread> threadsProdutoras;
@@ -24,18 +32,29 @@ public class InicializadorDeThreads {
 
 	private void inicializarConsumidoras() {
 		threadsConsumidoras = new ArrayList<>(quantidadeDeThreads);
-		
+
 		for (int i = 0; i < quantidadeDeThreads; i++) {
 			threadsConsumidoras.add(new Thread(new Consumidor(buffer, i)));
 		}
 
 		for (int i = 0; i < quantidadeDeThreads; i++) {
 			threadsConsumidoras.get(i).start();
+
+			// O método join é utilizado para que o fluxo de execução da classe
+			// chamadora (no caso a classe principal) só continue no ponto que
+			// parou após todas estas threads terminarem sua execução. Isso é
+			// necessário para que o tempo de execução seja impresso somente
+			// após todas as threds terminarem. Do contrário exibira antes.
+			try {
+				threadsConsumidoras.get(i).join();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	private void inicializarProdutoras() {
-		threadsProdutoras = new ArrayList<>(quantidadeDeThreads); 
+		threadsProdutoras = new ArrayList<>(quantidadeDeThreads);
 
 		for (int i = 0; i < quantidadeDeThreads; i++) {
 			threadsProdutoras.add(new Thread(new Produtor(buffer, i, geradorDePedidos)));
@@ -45,5 +64,4 @@ public class InicializadorDeThreads {
 			threadsProdutoras.get(i).start();
 		}
 	}
-
 }

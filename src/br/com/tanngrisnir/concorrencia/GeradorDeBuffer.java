@@ -3,6 +3,12 @@ package br.com.tanngrisnir.concorrencia;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * Classe que gera o buffer populado pela quantidade informada de pedidos.
+ * 
+ * @author Flávio Aparecido Ribeiro
+ *
+ */
 public class GeradorDeBuffer {
 
 	private GeradorDePedidos geradorDePedidos;

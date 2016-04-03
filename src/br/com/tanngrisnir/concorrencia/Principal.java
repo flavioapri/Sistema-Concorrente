@@ -1,29 +1,50 @@
 package br.com.tanngrisnir.concorrencia;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * Classe principal onde é executada a aplicação. As variáveis estaticas e final
+ * da classe foram declaradas como tal por serem utilizadas para simplificar o
+ * seu uso pelas classes da aplicação, evitando a passagem de muitos paramêtros
+ * para construtores e métodos destas. Estes valores são constantes final, uma
+ * vez definidos não poderam ser alterados durante a execução da aplicação, com
+ * exeção da variável <i>pedidosProcessados</i> que é alterada a cada
+ * processamento de um pedido. A classe também gera um log do processamento dos
+ * pedidos e seu tempo de execução. Vale elencar também o uso da classe
+ * <b>BlockingQueue</b> como o buffer que armazena os pedidos. Esta classe nos
+ * permite acessar seus objetos de maneira sincronizada e ordenada sem a
+ * necessidade de utlizarmos blocos de código sincronizados e uso dos métodos
+ * <i>wait</i> e <i>notiffy</i> para tal, simplificando a aplicação.
+ * 
+ * @author Flávio Aparecido Ribeiro
+ *
+ */
 public class Principal {
-	public static int pedidos = 5000;
-	public static int quantidadeDeThreads = 1;
-	public static long tempoDeExecucao = 180000;
-	public static long pedidosProcessados = 0;
+	static final int pedidos = 5000;
+	static final int quantidadeDeThreads = 10;
+	static final long tempoDeExecucao = 5000;
+	static long pedidosProcessados = 0;
+	static File log = new File("log.txt");
+	static FileWriter impressorDeLog;
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
+		//TODO Criar classe para o log 
+		impressorDeLog = new FileWriter(log);
 
 		BlockingQueue<Pedido> buffer = new ArrayBlockingQueue<>(pedidos);
 
+		//Inicia o timer
+		new Thread(new Timer()).start();
+
 		new InicializadorDeThreads(buffer).inicializar();
 
-		Thread timer = new Thread(new Timer());
+		impressorDeLog.write("Total de pedidos processados: " + pedidosProcessados);
+		System.out.println("Total de pedidos processados: " + pedidosProcessados);
 
-		timer.start();
-		
-		while (true) {
-			if (Thread.activeCount() == 1) {
-				System.out.println("Pedidos processados: " + pedidosProcessados);
-				break;
-			} 
-		}
+		impressorDeLog.close();
 	}
 }

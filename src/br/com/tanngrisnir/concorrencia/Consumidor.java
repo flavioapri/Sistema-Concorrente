@@ -2,9 +2,16 @@ package br.com.tanngrisnir.concorrencia;
 
 import java.util.concurrent.BlockingQueue;
 
+/**
+ * Consumidor de pedidos gerados. Remove um pedido do buffer. A classe
+ * implementa <u>Runnable</u> para que possa ser executada como uma thread.
+ * 
+ * @author Flávio Aparecido Ribeiro
+ *
+ */
 public class Consumidor implements Runnable {
-	private BlockingQueue<Pedido> buffer;
 	private int idThread;
+	private BlockingQueue<Pedido> buffer;
 
 	public Consumidor(BlockingQueue<Pedido> buffer, int i) {
 		this.buffer = buffer;
@@ -13,9 +20,10 @@ public class Consumidor implements Runnable {
 
 	@Override
 	public void run() {
-
+		// Enquanto o timer não esgotar o tempo...
 		while (!Timer.getTempoEsgotado()) {
 			try {
+				// Remove um pedido do buffer
 				System.out.println("Thread consumidora " + idThread + " consumiu o pedido " + buffer.take());
 				Principal.pedidosProcessados++;
 			} catch (InterruptedException e) {

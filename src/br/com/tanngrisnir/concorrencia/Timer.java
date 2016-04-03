@@ -1,5 +1,11 @@
 package br.com.tanngrisnir.concorrencia;
 
+/**
+ * Timer de tempo de execução na aplicação. O tempo de execução desejado é
+ * fornecido pela constante <i>tempoDeExecucao<i> na classe principal.
+ * 
+ * @author Flávio Aparecido Ribeiro
+ */
 public class Timer implements Runnable {
 	private long tempoInicial;
 	private long tempoFinal;
@@ -9,7 +15,7 @@ public class Timer implements Runnable {
 	public Timer() {
 		Timer.tempoEsgotado = false;
 	}
-	
+
 	public static boolean getTempoEsgotado() {
 		return tempoEsgotado;
 	}
