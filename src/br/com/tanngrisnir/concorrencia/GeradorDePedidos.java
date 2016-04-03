@@ -11,10 +11,9 @@ import java.util.Random;
  * intervalo na tabela ASCII de caracteres que pode ser impressos na codificação
  * Java. A tabela possui muitos caracteres que não podem ser impressos em Java.
  * Para entender o motivo do uso das constantes na classe veja a classe
- * <b>Pedido</b>.
+ * <b>Pedido</b>. Veja a tabela ASCII: http://www.asciitable.com/
  * 
  * @see Pedido
- * @see {@link} http://www.asciitable.com/
  * @author Flávio Aparecido Ribeiro
  *
  */

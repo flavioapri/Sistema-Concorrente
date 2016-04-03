@@ -2,7 +2,7 @@ package br.com.tanngrisnir.concorrencia;
 
 /**
  * Timer de tempo de execução na aplicação. O tempo de execução desejado é
- * fornecido pela constante <i>tempoDeExecucao<i> na classe principal.
+ * fornecido pela constante <i>tempoDeExecucao</i> na classe principal.
  * 
  * @author Flávio Aparecido Ribeiro
  */
