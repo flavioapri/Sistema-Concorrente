@@ -3,6 +3,8 @@ package br.com.tanngrisnir.concorrencia;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import static br.com.tanngrisnir.concorrencia.Principal.*;
+
 
 /**
  * Inicializa todas as threads necessárias para a execução da aplicação. Com ela
@@ -21,7 +23,7 @@ public class InicializadorDeThreads {
 
 	public InicializadorDeThreads(BlockingQueue<Pedido> buffer) {
 		this.buffer = buffer;
-		this.quantidadeDeThreads = Principal.quantidadeDeThreads;
+		this.quantidadeDeThreads = QUANTIDADE_DE_THREADS;
 		this.geradorDePedidos = new GeradorDePedidos();
 	}
 

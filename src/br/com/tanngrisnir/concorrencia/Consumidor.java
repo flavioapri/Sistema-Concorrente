@@ -1,6 +1,7 @@
 package br.com.tanngrisnir.concorrencia;
 
 import java.util.concurrent.BlockingQueue;
+import static br.com.tanngrisnir.concorrencia.Principal.*;
 
 /**
  * Consumidor de pedidos gerados. Remove um pedido do buffer. A classe
@@ -25,7 +26,7 @@ public class Consumidor implements Runnable {
 			try {
 				// Remove um pedido do buffer
 				System.out.println("Thread consumidora " + idThread + " consumiu o pedido " + buffer.take());
-				Principal.pedidosProcessados++;
+				pedidosProcessados++;
 			} catch (InterruptedException e) {
 				System.out.println("Não foi possível consumir o pedido");
 			}

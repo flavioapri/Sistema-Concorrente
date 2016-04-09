@@ -20,10 +20,10 @@ import java.util.Random;
 public class GeradorDePedidos {
 	private Random random;
 	private int numeroAleatorio;
-	private final static int primeiroAlgarismoNaTabelaASCII = 33;
-	private final static int ultimoAlgarismoNaTabelaASCII = 127;
-	private final static int caracteresNoPacoteDeDados = 1000;
-	private final static int digitosNoIdentificador = 20;
+	private final static int PRIMEIRO_IMPRIMIVEL_DA_TABELA_ASCII = 33;
+	private final static int ULTIMO_IMPRIMIVEL_NA_TABELA_ASCII = 127;
+	private final static int CARACTERES_NO_PACOTE_DE_DADOS = 1000;
+	private final static int DIGITOS_NO_IDENTIFICADOR = 20;
 
 	public GeradorDePedidos() {
 		this.random = new Random();
@@ -43,12 +43,12 @@ public class GeradorDePedidos {
 
 		// Enquanto a string dos dados não a quantidade de caracteres do pacote
 		// de dados...
-		while (dados.length() < caracteresNoPacoteDeDados) {
+		while (dados.length() < CARACTERES_NO_PACOTE_DE_DADOS) {
 			// Gera um número aleatório até o que representa o último caractere
 			// que pode ser impresso na tabela ASCII
-			numeroAleatorio = random.nextInt(ultimoAlgarismoNaTabelaASCII);
-			if (numeroAleatorio < primeiroAlgarismoNaTabelaASCII) {
-				// Se o número gerado for menor que o que representea primeiro
+			numeroAleatorio = random.nextInt(ULTIMO_IMPRIMIVEL_NA_TABELA_ASCII);
+			if (numeroAleatorio < PRIMEIRO_IMPRIMIVEL_DA_TABELA_ASCII) {
+				// Se o número gerado for menor que o que representa primeiro
 				// que pode ser impresso na tabela ASCII continua no laço
 				continue;
 			} else {
@@ -70,7 +70,7 @@ public class GeradorDePedidos {
 
 		// Segue a mesma lógica do método que gera os dados mas converte os
 		// números para os respectivos na tabela ASCII
-		while (id.length() < digitosNoIdentificador) {
+		while (id.length() < DIGITOS_NO_IDENTIFICADOR) {
 			numeroAleatorio = random.nextInt(10);
 			id.append(numeroAleatorio);
 		}

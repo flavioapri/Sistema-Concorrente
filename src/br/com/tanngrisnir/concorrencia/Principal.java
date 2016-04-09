@@ -24,9 +24,9 @@ import java.util.concurrent.BlockingQueue;
  *
  */
 public class Principal {
-	static final int pedidos = 5000;
-	static final int quantidadeDeThreads = 10;
-	static final long tempoDeExecucao = 5000;
+	static final int PEDIDOS = 5000;
+	static final int QUANTIDADE_DE_THREADS = 10;
+	static final long TEMPO_DE_EXECUCAO = 5000;
 	static long pedidosProcessados = 0;
 	static File log = new File("log.txt");
 	static FileWriter impressorDeLog;
@@ -35,7 +35,7 @@ public class Principal {
 		//TODO Criar classe para o log 
 		impressorDeLog = new FileWriter(log);
 
-		BlockingQueue<Pedido> buffer = new ArrayBlockingQueue<>(pedidos);
+		BlockingQueue<Pedido> buffer = new ArrayBlockingQueue<>(PEDIDOS);
 
 		//Inicia o timer
 		new Thread(new Timer()).start();

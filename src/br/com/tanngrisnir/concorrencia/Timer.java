@@ -1,4 +1,5 @@
 package br.com.tanngrisnir.concorrencia;
+import static br.com.tanngrisnir.concorrencia.Principal.*;
 
 /**
  * Timer de tempo de execução na aplicação. O tempo de execução desejado é
@@ -28,7 +29,7 @@ public class Timer implements Runnable {
 			tempoFinal = System.currentTimeMillis();
 			tempoTotal = tempoFinal - tempoInicial;
 
-			if (tempoTotal > Principal.tempoDeExecucao) {
+			if (tempoTotal > TEMPO_DE_EXECUCAO) {
 				tempoEsgotado = true;
 				break;
 			}
